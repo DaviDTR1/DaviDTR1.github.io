@@ -1,0 +1,178 @@
+{
+  "personal_data": {
+    "name": "David Torres",
+    "location": "Cuba",
+    "contact": {
+      "email": "davidluffy01@gmail.com",
+      "phone": "+53 54256228",
+      "linkedin": "linkedin.com/in/davidtr1",
+      "github": "github.com/DaviDTR1"
+    },
+    "last_updated": "January 2025"
+  },
+  "summary": "Computer Science graduate and competitive programmer with a strong foundation in algorithms, data structures, and software architecture. Proven track record in building scalable backend systems, automating complex business processes, and deploying cloud-native solutions.",
+  "experience": [
+    {
+      "period": "July 2025 - present",
+      "role": "Software Engineer (Backend and AI/ML)",
+      "company": "AllySolutions - EU - Remote",
+      "type": "work",
+      "responsibilities": [
+        "Designed and implemented a high-concurrency backend infrastructure for an automated reporting and project management ecosystem.",
+        "Engineered a scalable backend using FastAPI and PostgreSQL, leveraging AWS serverless architecture (Lambda, SQS, DynamoDB).",
+        "Developed a robust authentication and rate-limiting system for multi-tenant organizational management.",
+        "Built automated data pipelines using Langflow Agents and integrating with Google Sheets and Jira APIs.",
+        "Optimized data retrieval using hybrid search (full-text + vector) and advanced query rewriting."
+      ]
+    },
+    {
+      "period": "Nov 2024 - Jan 2026",
+      "role": "Lead Backend Architect",
+      "company": "Desoft - Cuba",
+      "type": "work",
+      "responsibilities": [
+        "Led the architectural design and development of enterprise-grade B2B platforms and automation tools.",
+        "Architected a legally compliant B2B platform to automate cross-company bidding within national regulatory frameworks.",
+        "Designed a documentation-aware automation tool using RAG (Retrieval-Augmented Generation) for port management.",
+        "Managed database schema design and optimization in PostgreSQL."
+      ]
+    },
+    {
+      "period": "Mar 2023 - present",
+      "role": "Full-Stack Developer",
+      "company": "Freelance - Remote",
+      "type": "work",
+      "highlights": [
+        "Developed the 'Delivery Check' application using React, Capacitor, FastAPI, and PostgreSQL."
+      ]
+    }
+  ],
+  "education": {
+    "institution": "University of Oriente, Cuba",
+    "degree": "Bachelor of Science in Computer Science",
+    "period": "Sept 2022 - Sept 2025",
+    "focus": "Advanced algorithms, software engineering principles, and distributed systems."
+  },
+  "skills": {
+    "programming_languages": ["Python (Expert)", "C++", "Java", "JavaScript", "TypeScript", "SQL"],
+    "backend_and_databases": ["FastAPI", "Flask", "SQLAlchemy", "PostgreSQL", "MongoDB", "RESTful APIs"],
+    "infrastructure_and_tools": ["AWS (Lambda, SQS, DynamoDB)", "Docker", "Git", "GitHub", "Linux"],
+    "frontend_and_mobile": ["React.js", "Capacitor", "TypeScript", "Streamlit"],
+    "languages": {
+      "Spanish": "Native",
+      "English": "B2 Level"
+    }
+  },
+  "projects": [
+    {
+      "name": "Agentic RAG Infrastructure",
+      "category": "AI/ML",
+      "description": "Built a document management system using LangChain, Gemini, and FAISS.",
+      "period": "Mar 2025 - June 2025",
+      "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
+      "technologies": ["LangChain", "Gemini", "FAISS", "Python"]
+    },
+    {
+      "name": "Automated Image Recognition Pipeline",
+      "category": "Machine Learning",
+      "description": "Developed a full data pipeline for image processing and classification using OpenCV and XGBoost.",
+      "period": "Sept 2024 - Oct 2024",
+      "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop",
+      "technologies": ["OpenCV", "XGBoost", "Python"]
+    },
+    {
+      "name": "Delivery Check App",
+      "category": "Full-Stack",
+      "description": "Mobile and web full-stack application for delivery management with real-time and offline-first synchronization.",
+      "period": "2023 - Present",
+      "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&h=400&fit=crop",
+      "technologies": ["React", "Capacitor", "FastAPI", "PostgreSQL"]
+    }
+  ],
+  "awards": [
+    {
+      "competition": "International Competitive Programming Contest (ICPC) Caribbean Finals",
+      "achievement": "Top 10 Finish (3x)",
+      "years": "2021-2023",
+      "type": "award"
+    },
+    {
+      "competition": "National Informatics Olympiad",
+      "achievement": "Gold Medal (2x)",
+      "years": "2018, 2019",
+      "type": "award"
+    },
+    {
+      "competition": "National Informatics Olympiad",
+      "achievement": "Bronze Medal",
+      "years": "2017",
+      "type": "award"
+    }
+  ],
+  "services": {
+    "Backend Development": {
+      "icon": "Server",
+      "summary": "Development of scalable APIs and backend systems with best practices and cloud-native architecture.",
+      "features": [
+        "RESTful APIs with FastAPI or Django Rest",
+        "Serverless architecture (AWS Lambda, SQS, DynamoDB)",
+        "Authentication and rate-limiting for multi-tenants",
+        "PostgreSQL, MongoDB and query optimization",
+        "Complete documentation with OpenAPI/Swagger"
+      ]
+    },
+    "AI/ML Solutions": {
+      "icon": "Brain",
+      "summary": "Implementation of artificial intelligence and machine learning solutions to automate processes.",
+      "features": [
+        "RAG (Retrieval-Augmented Generation) Systems",
+        "Intelligent agents with LangChain, LangFlow or n8n",
+        "Integration with Gemini, OpenAI, and Ollama"
+      ]
+    },
+    "Full-Stack Applications": {
+      "icon": "Wrench",
+      "summary": "End-to-end development of web and mobile applications using modern technologies.",
+      "features": [
+        "Frontend with React.js and TypeScript",
+        "Mobile applications with Capacitor",
+        "Interactive dashboards with Streamlit",
+        "Seamless frontend-backend integration",
+        "Responsive design and optimized UX"
+      ]
+    },
+    "Database Architecture": {
+      "icon": "Database",
+      "summary": "Design, optimization, and management of databases for high-reliability operations.",
+      "features": [
+        "Optimized PostgreSQL schema design",
+        "Data migration and transformation",
+        "Complex query optimization",
+        "Replication and backup configuration",
+        "MongoDB for NoSQL use cases"
+      ]
+    },
+    "Competitive Programming & Algorithms": {
+      "icon": "Code",
+      "summary": "Mentorship and consulting in algorithms, data structures, and problem-solving.",
+      "features": [
+        "Preparation for ICPC and Olympiads",
+        "Optimization of existing algorithms",
+        "Graph theory and dynamic programming",
+        "Advanced data structures",
+        "Code review and best practices in C++/Python"
+      ]
+    },
+    "Technical Consulting": {
+      "icon": "Rocket",
+      "summary": "Strategic advice on software architecture and technological decision-making.",
+      "features": [
+        "Audit of existing architecture",
+        "Distributed systems planning",
+        "Tech stack selection",
+        "Development process optimization",
+        "Technical team training"
+      ]
+    }
+  }
+}

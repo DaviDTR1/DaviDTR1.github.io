@@ -1,37 +1,12 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ExternalLink, Github } from "lucide-react";
-
-const projects = [
-  {
-    title: "Agentic RAG Infrastructure",
-    category: "AI/ML",
-    description: "Sistema de gestión documental con LangChain, Gemini y FAISS para búsqueda semántica avanzada y generación aumentada por recuperación.",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
-    technologies: ["LangChain", "Gemini", "FAISS", "Python"],
-    period: "Mar 2025 – Jun 2025",
-  },
-  {
-    title: "Automated Image Recognition Pipeline",
-    category: "Machine Learning",
-    description: "Pipeline completo de datos para procesamiento y clasificación de imágenes utilizando visión por computadora y machine learning.",
-    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop",
-    technologies: ["OpenCV", "XGBoost", "Python"],
-    period: "Sep 2024 – Oct 2024",
-  },
-  {
-    title: "Delivery Check App",
-    category: "Full-Stack",
-    description: "Aplicación móvil y web full-stack para gestión de entregas con sincronización en tiempo real y offline-first.",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&h=400&fit=crop",
-    technologies: ["React", "Capacitor", "FastAPI", "PostgreSQL"],
-    period: "2023 – Presente",
-  },
-];
+import { Github } from "lucide-react";
+import useProfileData from "@/hooks/useProfileData";
 
 const ProjectsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const profile = useProfileData();
 
   return (
     <section id="proyectos" ref={ref} className="py-24 bg-secondary/30">
@@ -51,9 +26,9 @@ const ProjectsSection = () => {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {profile.projects.map((project, index) => (
             <motion.article
-              key={project.title}
+              key={project.name}
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.15 }}
@@ -62,12 +37,12 @@ const ProjectsSection = () => {
               <div className="relative h-48 overflow-hidden">
                 <img
                   src={project.image}
-                  alt={project.title}
+                  alt={project.name}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4 gap-3">
                   <a
-                    href="https://github.com/DaviDTR1"
+                    href={`https://${profile.personal_data.contact.github}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 bg-foreground rounded-full flex items-center justify-center text-background hover:opacity-80 transition-opacity"
@@ -87,7 +62,7 @@ const ProjectsSection = () => {
                   </span>
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mt-2 mb-3">
-                  {project.title}
+                  {project.name}
                 </h3>
                 <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                   {project.description}

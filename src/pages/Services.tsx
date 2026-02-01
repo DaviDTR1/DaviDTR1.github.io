@@ -5,96 +5,27 @@ import Footer from "@/components/Footer";
 import { 
   Server, 
   Brain, 
-  Smartphone, 
+  Wrench, 
   Database, 
-  Code2, 
-  Settings,
+  Code, 
+  Rocket,
   CheckCircle,
   ArrowLeft
 } from "lucide-react";
+import useProfileData from "@/hooks/useProfileData";
 
-const allServices = [
-  {
-    icon: Server,
-    title: "Backend Development",
-    description: "Desarrollo de APIs y sistemas backend escalables con las mejores prácticas y arquitectura cloud-native.",
-    price: "Consultar",
-    features: [
-      "APIs RESTful con FastAPI y Flask",
-      "Arquitectura serverless (AWS Lambda, SQS, DynamoDB)",
-      "Autenticación y rate-limiting multi-tenant",
-      "PostgreSQL, MongoDB y optimización de queries",
-      "Documentación completa con OpenAPI/Swagger",
-    ],
-  },
-  {
-    icon: Brain,
-    title: "AI/ML Solutions",
-    description: "Implementación de soluciones de inteligencia artificial y machine learning para automatizar procesos.",
-    price: "Consultar",
-    features: [
-      "Sistemas RAG (Retrieval-Augmented Generation)",
-      "Agentes inteligentes con LangChain y LangFlow",
-      "Búsqueda híbrida (full-text + vector) con FAISS",
-      "Pipelines de procesamiento de imágenes",
-      "Integración con Gemini, OpenAI y modelos locales",
-    ],
-  },
-  {
-    icon: Smartphone,
-    title: "Full-Stack Applications",
-    description: "Desarrollo completo de aplicaciones web y móviles con tecnologías modernas.",
-    price: "Consultar",
-    features: [
-      "Frontend con React.js y TypeScript",
-      "Aplicaciones móviles con Capacitor",
-      "Dashboards interactivos con Streamlit",
-      "Integración frontend-backend seamless",
-      "Diseño responsivo y UX optimizada",
-    ],
-  },
-  {
-    icon: Database,
-    title: "Database Architecture",
-    description: "Diseño, optimización y gestión de bases de datos para operaciones de alta confiabilidad.",
-    price: "Consultar",
-    features: [
-      "Diseño de esquemas PostgreSQL optimizados",
-      "Migración y transformación de datos",
-      "Optimización de consultas complejas",
-      "Configuración de replicación y backups",
-      "MongoDB para casos de uso NoSQL",
-    ],
-  },
-  {
-    icon: Code2,
-    title: "Competitive Programming & Algorithms",
-    description: "Mentoría y consultoría en algoritmos, estructuras de datos y resolución de problemas.",
-    price: "Consultar",
-    features: [
-      "Preparación para ICPC y olimpiadas",
-      "Optimización de algoritmos existentes",
-      "Teoría de grafos y programación dinámica",
-      "Estructuras de datos avanzadas",
-      "Code review y mejores prácticas en C++/Python",
-    ],
-  },
-  {
-    icon: Settings,
-    title: "Technical Consulting",
-    description: "Asesoramiento estratégico en arquitectura de software y decisiones tecnológicas.",
-    price: "Consultar",
-    features: [
-      "Auditoría de arquitectura existente",
-      "Planificación de sistemas distribuidos",
-      "Selección de stack tecnológico",
-      "Optimización de procesos de desarrollo",
-      "Capacitación de equipos técnicos",
-    ],
-  },
-];
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Server,
+  Brain,
+  Wrench,
+  Database,
+  Code,
+  Rocket,
+};
 
 const Services = () => {
+  const profile = useProfileData();
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -128,52 +59,55 @@ const Services = () => {
 
           {/* Services Grid */}
           <div className="grid md:grid-cols-2 gap-8">
-            {allServices.map((service, index) => (
-              <motion.article
-                key={service.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-card border border-border rounded-2xl p-8 hover:border-primary/50 transition-colors shadow-card"
-              >
-                <div className="flex items-start gap-5">
-                  <div className="w-16 h-16 bg-gradient-gold rounded-xl flex items-center justify-center flex-shrink-0 shadow-glow">
-                    <service.icon className="w-8 h-8 text-primary-foreground" />
-                  </div>
-                  
-                  <div className="flex-1">
-                    <div className="flex items-start justify-between gap-4 mb-3">
-                      <h2 className="text-2xl font-display font-semibold text-foreground">
-                        {service.title}
-                      </h2>
-                      <span className="text-primary font-semibold whitespace-nowrap">
-                        {service.price}
-                      </span>
+            {Object.entries(profile.services).map(([title, service], index) => {
+              const Icon = iconMap[service.icon] || Server;
+              return (
+                <motion.article
+                  key={title}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-card border border-border rounded-2xl p-8 hover:border-primary/50 transition-colors shadow-card"
+                >
+                  <div className="flex items-start gap-5">
+                    <div className="w-16 h-16 bg-gradient-gold rounded-xl flex items-center justify-center flex-shrink-0 shadow-glow">
+                      <Icon className="w-8 h-8 text-primary-foreground" />
                     </div>
                     
-                    <p className="text-muted-foreground mb-6">
-                      {service.description}
-                    </p>
+                    <div className="flex-1">
+                      <div className="flex items-start justify-between gap-4 mb-3">
+                        <h2 className="text-2xl font-display font-semibold text-foreground">
+                          {title}
+                        </h2>
+                        <span className="text-primary font-semibold whitespace-nowrap">
+                          Consultar
+                        </span>
+                      </div>
+                      
+                      <p className="text-muted-foreground mb-6">
+                        {service.summary}
+                      </p>
 
-                    <ul className="space-y-3">
-                      {service.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-3 text-sm">
-                          <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                          <span className="text-foreground">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+                      <ul className="space-y-3">
+                        {service.features.map((feature, i) => (
+                          <li key={i} className="flex items-start gap-3 text-sm">
+                            <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                            <span className="text-foreground">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
 
-                    <a
-                      href="/#contacto"
-                      className="inline-flex items-center gap-2 mt-6 text-primary font-medium hover:underline"
-                    >
-                      Solicitar información
-                    </a>
+                      <a
+                        href={`mailto:${profile.personal_data.contact.email}?subject=Consulta: ${title}`}
+                        className="inline-flex items-center gap-2 mt-6 text-primary font-medium hover:underline"
+                      >
+                        Solicitar información
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </motion.article>
-            ))}
+                </motion.article>
+              );
+            })}
           </div>
 
           {/* Skills Section */}
@@ -191,25 +125,25 @@ const Services = () => {
               <div>
                 <h3 className="text-primary font-semibold mb-3">Lenguajes</h3>
                 <p className="text-muted-foreground text-sm">
-                  Python (Expert), C++, Java, JavaScript, TypeScript, SQL
+                  {profile.skills.programming_languages.join(", ")}
                 </p>
               </div>
               <div>
                 <h3 className="text-primary font-semibold mb-3">Backend & DB</h3>
                 <p className="text-muted-foreground text-sm">
-                  FastAPI, Flask, SQLAlchemy, PostgreSQL, MongoDB, RESTful APIs
+                  {profile.skills.backend_and_databases.join(", ")}
                 </p>
               </div>
               <div>
                 <h3 className="text-primary font-semibold mb-3">Infraestructura</h3>
                 <p className="text-muted-foreground text-sm">
-                  AWS (Lambda, SQS, DynamoDB), Docker, Git, GitHub, Linux
+                  {profile.skills.infrastructure_and_tools.join(", ")}
                 </p>
               </div>
               <div>
                 <h3 className="text-primary font-semibold mb-3">Frontend & Mobile</h3>
                 <p className="text-muted-foreground text-sm">
-                  React.js, Capacitor, TypeScript, Streamlit
+                  {profile.skills.frontend_and_mobile.join(", ")}
                 </p>
               </div>
             </div>
@@ -230,7 +164,7 @@ const Services = () => {
               Disponible para trabajo remoto globalmente.
             </p>
             <a
-              href="/#contacto"
+              href={`mailto:${profile.personal_data.contact.email}`}
               className="inline-flex items-center gap-2 bg-gradient-gold text-primary-foreground px-8 py-4 rounded-lg font-medium hover:opacity-90 transition-opacity shadow-glow text-lg"
             >
               Contactar ahora

@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Code, Brain, Cloud, Trophy } from "lucide-react";
+import useProfileData from "@/hooks/useProfileData";
 
 const skills = [
   { icon: Code, label: "Backend Development", description: "Python, FastAPI, PostgreSQL" },
@@ -13,6 +13,7 @@ const skills = [
 const AboutSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const profile = useProfileData();
 
   return (
     <section ref={ref} className="py-24 bg-secondary/30">
@@ -27,11 +28,7 @@ const AboutSection = () => {
             Sobre <span className="text-gradient">Mí</span>
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Graduado en Ciencias de la Computación y programador competitivo con 
-            una sólida base en algoritmos, estructuras de datos y arquitectura de software. 
-            Experiencia comprobada en la construcción de sistemas backend escalables, 
-            automatización de procesos complejos e implementación de soluciones cloud-native. 
-            Experto en Python y C++ con experiencia en desarrollo full-stack y sistemas distribuidos.
+            {profile.summary}
           </p>
         </motion.div>
 
@@ -66,7 +63,7 @@ const AboutSection = () => {
             { value: "3+", label: "Años de experiencia" },
             { value: "3x", label: "Top 10 ICPC Caribbean" },
             { value: "2x", label: "Medallas de Oro ONI" },
-            { value: "B2", label: "Nivel de Inglés" },
+            { value: profile.skills.languages.English, label: "Nivel de Inglés" },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="text-4xl md:text-5xl font-display font-bold text-gradient mb-2">

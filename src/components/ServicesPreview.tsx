@@ -1,38 +1,24 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Server, Brain, Wrench, Rocket } from "lucide-react";
+import { ArrowRight, Server, Brain, Wrench, Rocket, Database, Code } from "lucide-react";
+import useProfileData from "@/hooks/useProfileData";
 
-const services = [
-  {
-    icon: Server,
-    title: "Backend Development",
-    description: "APIs escalables con FastAPI, Flask, PostgreSQL y arquitectura serverless AWS.",
-    price: "Consultar",
-  },
-  {
-    icon: Brain,
-    title: "AI/ML Solutions",
-    description: "Sistemas RAG, agentes con LangChain, pipelines de ML y búsqueda semántica.",
-    price: "Consultar",
-  },
-  {
-    icon: Wrench,
-    title: "Full-Stack Apps",
-    description: "Aplicaciones web y móviles con React, TypeScript, Capacitor y bases de datos.",
-    price: "Consultar",
-  },
-  {
-    icon: Rocket,
-    title: "Technical Consulting",
-    description: "Arquitectura de sistemas, optimización de código y mentoría en algoritmos.",
-    price: "Consultar",
-  },
-];
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Server,
+  Brain,
+  Wrench,
+  Rocket,
+  Database,
+  Code,
+};
 
 const ServicesPreview = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const profile = useProfileData();
+
+  const serviceEntries = Object.entries(profile.services).slice(0, 4);
 
   return (
     <section ref={ref} className="py-24">
@@ -61,26 +47,29 @@ const ServicesPreview = () => {
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group bg-card border border-border rounded-xl p-6 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300 shadow-card"
-            >
-              <div className="w-14 h-14 bg-gradient-gold rounded-xl flex items-center justify-center mb-5 shadow-glow">
-                <service.icon className="w-7 h-7 text-primary-foreground" />
-              </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">
-                {service.title}
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                {service.description}
-              </p>
-              <p className="text-primary font-semibold">{service.price}</p>
-            </motion.div>
-          ))}
+          {serviceEntries.map(([title, service], index) => {
+            const Icon = iconMap[service.icon] || Server;
+            return (
+              <motion.div
+                key={title}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group bg-card border border-border rounded-xl p-6 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300 shadow-card"
+              >
+                <div className="w-14 h-14 bg-gradient-gold rounded-xl flex items-center justify-center mb-5 shadow-glow">
+                  <Icon className="w-7 h-7 text-primary-foreground" />
+                </div>
+                <h3 className="text-lg font-semibold text-foreground mb-2">
+                  {title}
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                  {service.summary}
+                </p>
+                <p className="text-primary font-semibold">Consultar</p>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

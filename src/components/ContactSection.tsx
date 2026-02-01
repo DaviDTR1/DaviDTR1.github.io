@@ -2,10 +2,12 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Mail, MapPin, Phone, Send, Github, Linkedin } from "lucide-react";
 import { toast } from "sonner";
+import useProfileData from "@/hooks/useProfileData";
 
 const ContactSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const profile = useProfileData();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -61,10 +63,10 @@ const ContactSection = () => {
                 <div>
                   <p className="text-sm text-muted-foreground">Email</p>
                   <a
-                    href="mailto:davidluffy01@gmail.com"
+                    href={`mailto:${profile.personal_data.contact.email}`}
                     className="text-foreground hover:text-primary transition-colors"
                   >
-                    davidluffy01@gmail.com
+                    {profile.personal_data.contact.email}
                   </a>
                 </div>
               </div>
@@ -76,10 +78,10 @@ const ContactSection = () => {
                 <div>
                   <p className="text-sm text-muted-foreground">Teléfono</p>
                   <a
-                    href="tel:+5354256228"
+                    href={`tel:${profile.personal_data.contact.phone.replace(/\s/g, "")}`}
                     className="text-foreground hover:text-primary transition-colors"
                   >
-                    +53 5 4256228
+                    {profile.personal_data.contact.phone}
                   </a>
                 </div>
               </div>
@@ -90,7 +92,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Ubicación</p>
-                  <p className="text-foreground">Cuba (Disponible para remoto)</p>
+                  <p className="text-foreground">{profile.personal_data.location} (Disponible para remoto)</p>
                 </div>
               </div>
 
@@ -101,12 +103,12 @@ const ContactSection = () => {
                 <div>
                   <p className="text-sm text-muted-foreground">LinkedIn</p>
                   <a
-                    href="https://linkedin.com/in/davidtr1"
+                    href={`https://${profile.personal_data.contact.linkedin}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-foreground hover:text-primary transition-colors"
                   >
-                    linkedin.com/in/davidtr1
+                    {profile.personal_data.contact.linkedin}
                   </a>
                 </div>
               </div>
@@ -118,12 +120,12 @@ const ContactSection = () => {
                 <div>
                   <p className="text-sm text-muted-foreground">GitHub</p>
                   <a
-                    href="https://github.com/DaviDTR1"
+                    href={`https://${profile.personal_data.contact.github}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-foreground hover:text-primary transition-colors"
                   >
-                    github.com/DaviDTR1
+                    {profile.personal_data.contact.github}
                   </a>
                 </div>
               </div>

@@ -1,55 +1,36 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Briefcase, GraduationCap, Award } from "lucide-react";
-
-const experiences = [
-  {
-    type: "work",
-    title: "Software Engineer (Backend & AI/ML)",
-    company: "AllySolutions – EU (Remote)",
-    period: "Jul 2025 – Presente",
-    description: "Diseño e implementación de infraestructura backend de alta concurrencia para ecosistema de reportes automatizados. Desarrollo de pipelines de datos con Langflow Agents, integración con Google Sheets y Jira APIs. Optimización de búsqueda híbrida (full-text + vector).",
-  },
-  {
-    type: "work",
-    title: "Lead Backend Architect",
-    company: "Desoft – Cuba",
-    period: "Nov 2024 – Ene 2026",
-    description: "Liderazgo en diseño arquitectónico y desarrollo de plataformas B2B empresariales. Diseño de herramientas de automatización con RAG para gestión portuaria. Optimización de esquemas PostgreSQL para operaciones de alta confiabilidad.",
-  },
-  {
-    type: "work",
-    title: "Full-Stack Developer",
-    company: "Freelance – Remote",
-    period: "Mar 2023 – Presente",
-    description: "Desarrollo de soluciones de software end-to-end para plataformas móviles y web. Creación de 'Delivery Check', aplicación full-stack con React, Capacitor, FastAPI y PostgreSQL.",
-  },
-  {
-    type: "education",
-    title: "B.Sc. en Ciencias de la Computación",
-    company: "Universidad de Oriente – Santiago de Cuba, Cuba",
-    period: "Sep 2022 – Sep 2025",
-    description: "Enfoque en algoritmos avanzados, principios de ingeniería de software y sistemas distribuidos.",
-  },
-  {
-    type: "award",
-    title: "ICPC Caribbean Finals 2021-2023",
-    company: "Top 10 Finish (3x)",
-    period: "2021 – 2023",
-    description: "Resolución de problemas algorítmicos complejos de teoría de grafos, programación dinámica y matemáticas avanzadas.",
-  },
-  {
-    type: "award",
-    title: "Olimpiada Nacional de Informática",
-    company: "Medalla de Oro (2x) + Bronce",
-    period: "2017 – 2019",
-    description: "Excelencia demostrada en resolución de problemas e implementación eficiente de código bajo presión.",
-  },
-];
+import useProfileData from "@/hooks/useProfileData";
 
 const ExperienceSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const profile = useProfileData();
+
+  const experiences = [
+    ...profile.experience.map((exp) => ({
+      type: "work",
+      title: exp.role,
+      company: exp.company,
+      period: exp.period,
+      description: exp.responsibilities?.join(" ") || exp.highlights?.join(" ") || "",
+    })),
+    {
+      type: "education",
+      title: profile.education.degree,
+      company: profile.education.institution,
+      period: profile.education.period,
+      description: profile.education.focus,
+    },
+    ...profile.awards.map((award) => ({
+      type: "award",
+      title: award.competition,
+      company: award.achievement,
+      period: award.years,
+      description: "",
+    })),
+  ];
 
   const getIcon = (type: string) => {
     switch (type) {
@@ -107,9 +88,11 @@ const ExperienceSection = () => {
                   <p className="text-muted-foreground text-sm mb-3">
                     {exp.company}
                   </p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {exp.description}
-                  </p>
+                  {exp.description && (
+                    <p className="text-muted-foreground leading-relaxed">
+                      {exp.description}
+                    </p>
+                  )}
                 </div>
               </motion.div>
             );

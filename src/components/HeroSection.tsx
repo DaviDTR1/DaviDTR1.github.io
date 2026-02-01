@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Mail, Linkedin, Github } from "lucide-react";
 import profileImage from "@/assets/profile-hero.jpg";
+import useProfileData from "@/hooks/useProfileData";
 
 const HeroSection = () => {
+  const profile = useProfileData();
+
   return (
     <section className="min-h-screen flex items-center justify-center pt-20 pb-16 relative overflow-hidden">
       {/* Background gradient */}
@@ -32,9 +35,9 @@ const HeroSection = () => {
               transition={{ delay: 0.3, duration: 0.6 }}
               className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-foreground leading-tight mb-6"
             >
-              David
+              {profile.personal_data.name.split(" ")[0]}
               <br />
-              <span className="text-gradient">Torres</span>
+              <span className="text-gradient">{profile.personal_data.name.split(" ")[1]}</span>
             </motion.h1>
 
             <motion.p
@@ -43,9 +46,7 @@ const HeroSection = () => {
               transition={{ delay: 0.5 }}
               className="text-lg text-muted-foreground max-w-md mb-8 leading-relaxed"
             >
-              Computer Science graduate and competitive programmer with expertise in 
-              building scalable backend systems, AI/ML solutions, and cloud-native applications.
-              Available for remote work.
+              {profile.summary}
             </motion.p>
 
             <motion.div
@@ -63,7 +64,7 @@ const HeroSection = () => {
               </a>
               <div className="flex items-center gap-3">
                 <a
-                  href="https://linkedin.com/in/davidtr1"
+                  href={`https://${profile.personal_data.contact.linkedin}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
@@ -71,7 +72,7 @@ const HeroSection = () => {
                   <Linkedin size={20} />
                 </a>
                 <a
-                  href="https://github.com/DaviDTR1"
+                  href={`https://${profile.personal_data.contact.github}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
@@ -94,7 +95,7 @@ const HeroSection = () => {
               <div className="relative w-72 h-96 md:w-80 md:h-[28rem] rounded-2xl overflow-hidden border border-border shadow-card">
                 <img
                   src={profileImage}
-                  alt="David Torres"
+                  alt={profile.personal_data.name}
                   className="w-full h-full object-cover"
                 />
               </div>
